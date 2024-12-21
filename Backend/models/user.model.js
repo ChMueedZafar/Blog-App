@@ -10,7 +10,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        validate: [validator.isEmail, 'Please enter a valid email address']
+        validate: [validator.isEmail, 'Please enter a valid email address'],
+        trim: true,
+        lowercase: true
     },
     phone: {
         type: String,
@@ -19,8 +21,14 @@ const userSchema = new mongoose.Schema({
         validate: [validator.isMobilePhone, 'Please enter a valid phone number']
     },
     photo: {
-        type: String,
-        required: true
+        public_id: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        }
     },
     education: {
         type: String,
