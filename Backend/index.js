@@ -2,6 +2,7 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import userRoutes from './routes/user.route.js'
+import blogRoutes from './routes/blog.route.js'
 import { v2 as cloudinary } from 'cloudinary'
 import fileupload from 'express-fileupload'
 
@@ -34,7 +35,7 @@ mongoose.connect(mongoURI)
   });
 // define routes
 app.use('/api/user', userRoutes)
-
+app.use('/api/blog', blogRoutes)
 // cloudinary
 cloudinary.config({ 
   cloud_name: process.env.CLOUD_NAME, 
