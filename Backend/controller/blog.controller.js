@@ -1,6 +1,9 @@
 import mongoose, { mongo } from "mongoose";
 import { Blog } from "../models/blog.model.js";
 import { v2 as cloudinary } from "cloudinary";
+
+
+// blog create controller
 export const createBlog = async (req, res) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -64,6 +67,10 @@ export const createBlog = async (req, res) => {
   }
 };
 
+
+
+// blog delete controller
+
 export const deleteBlog = async (req, res) => {
   const { id } = req.params;
   const blog = await Blog.findById(id);
@@ -74,37 +81,40 @@ export const deleteBlog = async (req, res) => {
   res.status(200).json({ message: "Blog deleted successfully" });
 };
 
-export const getAllBlogs = async (req, res) => {
-  const allBlogs = await Blog.find();
-  res.status(200).json(allBlogs);
-};
+// export const getAllBlogs = async (req, res) => {
+//   const allBlogs = await Blog.find();
+//   res.status(200).json(allBlogs);
+// };
 
-export const getSingleBlogs = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: "Invalid Blog id" });
-  }
-  const blog = await Blog.findById(id);
-  if (!blog) {
-    return res.status(404).json({ message: "Blog not found" });
-  }
-  res.status(200).json(blog);
-};
+// export const getSingleBlogs = async (req, res) => {
+//   const { id } = req.params;
+//   if (!mongoose.Types.ObjectId.isValid(id)) {
+//     return res.status(400).json({ message: "Invalid Blog id" });
+//   }
+//   const blog = await Blog.findById(id);
+//   if (!blog) {
+//     return res.status(404).json({ message: "Blog not found" });
+//   }
+//   res.status(200).json(blog);
+// };
 
-export const getMyBlogs = async (req, res) => {
-  const createdBy = req.user._id;
-  const myBlogs = await Blog.find({ createdBy });
-  res.status(200).json(myBlogs);
-};
+// export const getMyBlogs = async (req, res) => {
+//   const createdBy = req.user._id;
+//   const myBlogs = await Blog.find({ createdBy });
+//   res.status(200).json(myBlogs);
+// };
 
-export const updateBlog = async (req, res) => {
-  const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ message: "Invalid Blog id" });
-  }
-  const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
-  if (!updatedBlog) {
-    return res.status(404).json({ message: "Blog not found" });
-  }
-  res.status(200).json(updatedBlog);
-};
+
+// blog update controller
+
+// export const updateBlog = async (req, res) => {
+//   const { id } = req.params;
+//   if (!mongoose.Types.ObjectId.isValid(id)) {
+//     return res.status(400).json({ message: "Invalid Blog id" });
+//   }
+//   const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
+//   if (!updatedBlog) {
+//     return res.status(404).json({ message: "Blog not found" });
+//   }
+//   res.status(200).json(updatedBlog);
+// };

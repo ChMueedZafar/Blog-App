@@ -5,6 +5,7 @@ import userRoutes from './routes/user.route.js'
 import blogRoutes from './routes/blog.route.js'
 import { v2 as cloudinary } from 'cloudinary'
 import fileupload from 'express-fileupload'
+import cookieParser from 'cookie-parser'
 
 const app = express()
 dotenv.config()
@@ -13,7 +14,7 @@ const port = process.env.PORT
 const mongoURI = process.env.MONGO_URI
 // middleware
 app.use(express.json())
-
+app.use(cookieParser())
 app.use(fileupload({
   useTempFiles: true,
   tempFileDir: '/tmp/'
