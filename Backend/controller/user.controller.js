@@ -58,6 +58,7 @@ export const register = async (req, res) => {
         await newUser.save()
         if(newUser){
             const token = await createTokenAndsavecookies(newUser._id, res)
+            console.log("register token", token)
             return res.status(201).json({
                 message: "User Registered successfully", 
                 newUser, 
@@ -109,6 +110,7 @@ export const login = async (req, res) => {
         }
 
         const token = await createTokenAndsavecookies(user._id, res)
+        console.log("login token", token)
         return res.status(200).json({
             message: "User Logged In Successfully",
             user: {

@@ -26,11 +26,11 @@ const blogSchema = new mongoose.Schema({
     },
     adminName: {
         type: String,
-        required: true
+        // required: true
     },
     adminPhoto: {
         type: String,
-        required: true
+        // required: true
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
