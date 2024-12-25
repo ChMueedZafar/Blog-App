@@ -26,11 +26,9 @@ const blogSchema = new mongoose.Schema({
     },
     adminName: {
         type: String,
-        // required: true
     },
     adminPhoto: {
         type: String,
-        // required: true
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
