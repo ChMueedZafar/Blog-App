@@ -93,4 +93,48 @@ export const GetAllBlogs = async (req, res) => {
   }
 }
 
-// get one blog
+// get single blog
+export const GetSingleBlog = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ message: "Blog not found" });
+  }
+  try {
+    const blog = await Blog.findById(id);
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+    res.status(200).json({ blog });
+  }
+  catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal Server error" });
+  }
+}
+
+
+// My Blogs controller
+export const GetMyBlogs = async (req, res) => {
+  const createdBy = req.user._id;
+  try {
+    const blogs = await Blog.find({ createdBy });
+    res.status(200).json({ blogs});
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal Server error" });
+  }
+}
+
+// update blog controller
+export const updateBlog = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ message: "invalid blog id" });
+  }
+  const updatedBlog = await Blog.findByIdAndUpdate(id, req.body, { new: true });
+  if (!updatedBlog) {
+    return res.status(404).json({ message: "Blog not found" });
+  }
+  res.status(200).json({ updatedBlog });
+}
+
