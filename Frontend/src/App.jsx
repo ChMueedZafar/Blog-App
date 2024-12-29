@@ -1,38 +1,60 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
-
-import Navbar from '../src/Components/Navbar'
-import Home from '../src/Components/Home'
-import Footer from '../src/Components/Footer'
-import Blogs from '../src/Pages/Blogs'
-import About from '../src/Pages/About'
-import Contact from '../src/Pages/Contact'
-import Login from '../src/Pages/Login'
-import Register from '../src/Pages/Register'
-import Dashboard from '../src/Pages/Dashboard'
-
-const App = () => {
-  const location = useLocation()
-  const hidenavbarfooter =["/Login","/Register","/Dashboard"].includes(
+import React from "react";
+import Navbar from "../src/components/Navbar";
+import Home from "../src/components/Home";
+import Footer from "../src/components/Footer";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import Blogs from "../src/pages/Blogs";
+import About from "../src/pages/About";
+import Contact from "../src/Pages/Contact";
+import Login from "../src/pages/Login";
+import Register from "../src/pages/Register";
+import Dashboard from "../src/pages/Dashboard";
+import Creators from "./pages/Creators";
+import { useAuth } from "../Context/AuthProvider";
+import { Toaster } from "react-hot-toast";
+import UpdateBlog from "./dashboard/UpdateBlog";
+import Detail from "../src/Pages/Detail";
+import NotFound from "./pages/NotFound";
+function App() {
+  const location = useLocation();
+  const hideNavbarFooter = ["/dashboard", "/login", "/register"].includes(
     location.pathname
   );
+  const { blogs, isAuthenticated } = useAuth();
+  let token = localStorage.getItem("jwt"); // Retrieve the token directly from the localStorage to maininting the routes protect (Go to login.jsx)
+  console.log(blogs);
+  console.log(isAuthenticated); // it is not using because every page refresh it was redirected to /login
 
   return (
     <div>
-    {!hidenavbarfooter && <Navbar />}
-    <Routes >
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/blogs" element={<Blogs />} />
-      <Route exact path="/about" element={<About />} />
-      <Route exact path="/contact" element={<Contact />} />
-      <Route exact path="login" element={<Login />} />
-      <Route exact path="register" element={<Register />} />
-      <Route exact path="dashboard" element={<Dashboard />} />
-    </Routes>
-    {!hidenavbarfooter && <Footer />}
-    </div>
-  )
- }
+      {!hideNavbarFooter && <Navbar />}
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={token ? <Home /> : <Navigate to={"/login"} />}
+        />
+        <Route exact path="/blogs" element={<Blogs />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/contact" element={<Contact />} />
+        <Route exact path="/creators" element={<Creators />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/dashboard" element={<Dashboard />} />
 
-export default App
+        {/* Single page route */}
+        <Route exact path="/blog/:id" element={<Detail />} />
+
+        {/* Update page route */}
+        <Route exact path="/blog/update/:id" element={<UpdateBlog />} />
+
+        {/* Universal route */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Toaster />
+      {!hideNavbarFooter && <Footer />}
+    </div>
+  );
+}
+
+export default App;
