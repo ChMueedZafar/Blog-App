@@ -1,20 +1,20 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import Navbar from "../src/components/Navbar";
-import Home from "../src/components/Home";
-import Footer from "../src/components/Footer";
+import Navbar from "./Components/Navbar";
+import Home from "./Components/Home";
+import Footer from "./Components/Footer";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import Blogs from "../src/Pages/Blogs";
-import About from "../src/Pages/About";
-import Contact from "../src/Pages/Contact";
-import Login from "../src/Pages/Login";
-import Register from "../src/Pages/Register";
-import Dashboard from "../src/Pages/Dashboard";
+import Blogs from "./Pages/Blogs";
+import About from "./Pages/About";
+import Contact from "./Pages/Contact";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Dashboard from "./Pages/Dashboard";
 import Creators from "./Pages/Creators";
-import { useAuth } from "../src/Context/AuthProvider";
+import { useAuth } from "./context/AuthProvider";
 import { Toaster } from "react-hot-toast";
 import UpdateBlog from "./Dasbboard/Update";
-import Detail from "../src/Pages/Detail";
+import Detail from "./Pages/Detail";
 
 
 function App() {
@@ -49,9 +49,6 @@ function App() {
 
         {/* Update page route */}
         <Route exact path="/blog/update/:id" element={<UpdateBlog />} />
-
-        {/* Universal route */}
-        <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
       {!hideNavbarFooter && <Footer />}

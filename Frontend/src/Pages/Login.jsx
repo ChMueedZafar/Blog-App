@@ -14,7 +14,6 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
       const { data } = await axios.post(
         "http://localhost:4001/api/users/login",
@@ -26,26 +25,17 @@ function Login() {
           },
         }
       );
-      console.log(data);
-      // Store the token in localStorage
-      localStorage.setItem("jwt", data.token); // storing token in localStorage so that if user refreshed the page it will not redirect again in login
-      toast.success(data.message || "User Logined successfully", {
-        duration: 3000,
-      });
-      setProfile(data);
-      setIsAuthenticated(true);
-      setEmail("");
-      setPassword("");
-      setRole("");
-      navigateTo("/");
+      console.log("Response:", data);
+      if (data.token) {
+        localStorage.setItem("jwt", data.token);
+        toast.success(data.message || "Login successful");
+        setProfile(data);
+        setIsAuthenticated(true);
+        navigateTo("/");
+      }
     } catch (error) {
-      console.log(error);
-      toast.error(
-        error.response.data.message || "Please fill the required fields",
-        {
-          duration: 3000,
-        }
-      );
+      console.error("Login error:", error);
+      toast.error(error.response?.data?.message || "Login failed");
     }
   };
 
@@ -55,7 +45,7 @@ function Login() {
         <div className="w-full max-w-md bg-white shadow-md rounded-lg p-8">
           <form onSubmit={handleLogin}>
             <div className="font-semibold text-xl items-center text-center">
-              Cilli<span className="text-blue-500">Blog</span>
+              Event Mangment<span className="text-blue-500">App</span>
             </div>
             <h1 className="text-xl font-semibold mb-6">Login</h1>
             <select
