@@ -1,20 +1,22 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import Navbar from "../src/components/Navbar";
 import Home from "../src/components/Home";
 import Footer from "../src/components/Footer";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import Blogs from "../src/pages/Blogs";
-import About from "../src/pages/About";
+import Blogs from "../src/Pages/Blogs";
+import About from "../src/Pages/About";
 import Contact from "../src/Pages/Contact";
-import Login from "../src/pages/Login";
-import Register from "../src/pages/Register";
-import Dashboard from "../src/pages/Dashboard";
-import Creators from "./pages/Creators";
-import { useAuth } from "../Context/AuthProvider";
+import Login from "../src/Pages/Login";
+import Register from "../src/Pages/Register";
+import Dashboard from "../src/Pages/Dashboard";
+import Creators from "./Pages/Creators";
+import { useAuth } from "../src/Context/AuthProvider";
 import { Toaster } from "react-hot-toast";
-import UpdateBlog from "./dashboard/UpdateBlog";
+import UpdateBlog from "./Dasbboard/Update";
 import Detail from "../src/Pages/Detail";
-import NotFound from "./pages/NotFound";
+
+
 function App() {
   const location = useLocation();
   const hideNavbarFooter = ["/dashboard", "/login", "/register"].includes(

@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
-import Sidebar from "../dashboard/Sidebar";
-import MyProfile from "../dashboard/MyProfile";
-import MyBlogs from "../dashboard/MyBlogs";
-import CreateBlog from "../dashboard/CreateBlog";
-import UpdateBlog from "../dashboard/UpdateBlog";
+import Sidebar from "../Dasbboard/Slidbar";
+import MyProfile from "../Dasbboard/MyProfile";
+import MyBlogs from "../Dasbboard/MyBlogs";
+import CreateBlog from "../Dasbboard/CreateBlogs";
+import UpdateBlog from "../Dasbboard/Update";
 import { Navigate } from "react-router-dom";
 function Dashboard() {
   const { profile, isAuthenticated } = useAuth();
