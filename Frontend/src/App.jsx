@@ -11,7 +11,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Dashboard from "./Pages/Dashboard";
 import Creators from "./Pages/Creators";
-import { useAuth } from "./context/AuthProvider";
+import { useAuth } from "./Context/AuthProvider";
 import { Toaster } from "react-hot-toast";
 import UpdateBlog from "./Dasbboard/Update";
 import Detail from "./Pages/Detail";
