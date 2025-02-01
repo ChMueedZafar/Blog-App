@@ -23,9 +23,9 @@ function App() {
     location.pathname
   );
   const { blogs, isAuthenticated } = useAuth();
-  let token = localStorage.getItem("jwt"); // Retrieve the token directly from the localStorage to maininting the routes protect (Go to login.jsx)
+  let token = localStorage.getItem("jwt"); 
   console.log(blogs);
-  console.log(isAuthenticated); // it is not using because every page refresh it was redirected to /login
+  console.log(isAuthenticated); 
 
   return (
     <div>
