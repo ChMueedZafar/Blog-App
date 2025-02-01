@@ -43,11 +43,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/dashboard" element={<Dashboard />} />
-
-        {/* Single page route */}
         <Route exact path="/blog/:id" element={<Detail />} />
-
-        {/* Update page route */}
         <Route exact path="/blog/update/:id" element={<UpdateBlog />} />
       </Routes>
       <Toaster />
